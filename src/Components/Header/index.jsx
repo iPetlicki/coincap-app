@@ -2,7 +2,7 @@ import React from 'react';
 import styles from '../../Assets/Styles/header.module.css'
 import logo from '../../Assets/Images/header-logo.svg'
 import portfolio from '../../Assets/Images/portfolio.svg'
-import MostPopularCoin from "../MostPopularCoin";
+import MostPopularCoins from "../MostPopularCoins";
 
 
 const Header = () => {
@@ -15,9 +15,7 @@ const Header = () => {
 
             <div className={styles.headerBackground}>
                 <div className={styles.headerPopularCoinsContainer}>
-                    <MostPopularCoin />
-                    <MostPopularCoin />
-                    <MostPopularCoin />
+                    <MostPopularCoins />
                 </div>
                 <button className={styles.headerPortfolio}>
                     <img src={portfolio} alt='portfolio' />

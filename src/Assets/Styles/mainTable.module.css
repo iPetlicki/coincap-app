@@ -1,0 +1,38 @@
+.mainTableContainer {
+    width: 1130px;
+    margin: 50px auto;
+}
+
+table {
+
+    border-collapse: collapse;
+}
+
+tr, th, td{
+    border: solid 1px black;
+    border-collapse: collapse;
+    background: #FFFFFF;
+}
+
+thead {
+    background: #E7E6FF
+}
+
+.viewMore {
+    padding: 8px 21px 11px 21px;
+    width: 138px;
+    height: 36px;
+    background: linear-gradient(96.66deg, #7490FC -7.42%, #601D96 155.8%);
+    box-shadow: 0 2px 15px -3px rgba(0, 0, 0, 0.4);
+    border-width: 0;
+    border-radius: 100px;
+    color: #FFFFFF;
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+    margin: 40px 0;
+}
