@@ -9,19 +9,19 @@ const MostPopularCoins = () => {
     return (
         <>
             <div className={styles.MostPopularCoinContainer}>
-                {isLoading ? <p>Loading</p> : <p>{assets[0].id}</p>}
-                {isLoading ? <p>Loading</p> : <p>{assets[0].symbol}</p>}
-                {isLoading ? <p>Loading</p> : <p>{assets[0].vwap24Hr}</p>}
+                {isLoading ? <p>Loading</p> : <p>{assets[0].name}</p>}
+                {isLoading ? <p>Loading</p> : <p className={styles.symbol}>{assets[0].symbol}</p>}
+                {isLoading ? <p>Loading</p> : <p>${Number(assets[0].vwap24Hr).toFixed(2)}</p>}
             </div>
             <div className={styles.MostPopularCoinContainer}>
-                {isLoading ? <p>Loading</p> : <p>{assets[1].id}</p>}
-                {isLoading ? <p>Loading</p> : <p>{assets[1].symbol}</p>}
-                {isLoading ? <p>Loading</p> : <p>{assets[1].vwap24Hr}</p>}
+                {isLoading ? <p>Loading</p> : <p>{assets[1].name}</p>}
+                {isLoading ? <p>Loading</p> : <p className={styles.symbol}>{assets[1].symbol}</p>}
+                {isLoading ? <p>Loading</p> : <p>${Number(assets[1].vwap24Hr).toFixed(2)}</p>}
             </div>
             <div className={styles.MostPopularCoinContainer}>
-                {isLoading ? <p>Loading</p> : <p>{assets[2].id}</p>}
-                {isLoading ? <p>Loading</p> : <p>{assets[2].symbol}</p>}
-                {isLoading ? <p>Loading</p> : <p>{assets[2].vwap24Hr}</p>}
+                {isLoading ? <p>Loading</p> : <p>{assets[2].name}</p>}
+                {isLoading ? <p>Loading</p> : <p className={styles.symbol}>{assets[2].symbol}</p>}
+                {isLoading ? <p>Loading</p> : <p>${Number(assets[2].vwap24Hr).toFixed(2)}</p>}
             </div>
 
         </>

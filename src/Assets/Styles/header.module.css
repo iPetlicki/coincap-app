@@ -1,7 +1,7 @@
 .headerLogo {
     font-family: 'Krona One', sans-serif;
     font-size: 20px;
-    margin: 40px auto 40px 17%;
+    margin: 40px auto 40px 400px;
 }
 
 .headerBackground {
@@ -15,12 +15,13 @@
 .headerPopularCoinsContainer {
     width: 1130px;
     display: flex;
+    margin-left: 360px;
 }
 
 .headerPortfolio {
     width: 184px;
     height: 42px;
-    margin: 42px 0;
+    margin: 42px 10% 42px 0;
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.37) 0%, rgba(255, 255, 255, 0.1295) 111.89%);
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 9px;
