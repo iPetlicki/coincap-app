@@ -4,10 +4,15 @@ import {useNavigate} from "react-router-dom";
 import plus from '../../Assets/Images/plus.svg'
 
 
-const MainTable = ({limit, setLimit}) => {
+const MainTable = ({limit, setLimit, setActive, getData}) => {
 
     const {data, isLoading} = useGetCoinsQuery(limit)
     const navigate = useNavigate()
+    const showModal = (e, assets) => {
+        e.stopPropagation()
+        setActive(true)
+        getData(assets.priceUsd, assets.name)
+    }
 
 //------------------------------стилизовать---------------------
     if (isLoading) {
@@ -17,38 +22,38 @@ const MainTable = ({limit, setLimit}) => {
 //----------------------------------------------------------
     return (
         <div className={styles.mainTableContainer}>
-            <table>
+            <table className={styles.mainTable}>
                 <thead>
-                    <tr>
-                        <th>Rank</th>
-                        <th>Name</th>
-                        <th>VWAP</th>
-                        <th>Change(24h)</th>
-                        <th>Market Cap</th>
-                        <th>Price</th>
-                        <th></th>
+                    <tr className={styles.trMain}>
+                        <th className={styles.thMain}>Rank</th>
+                        <th className={styles.thMain}>Name</th>
+                        <th className={styles.thMain}>VWAP</th>
+                        <th className={styles.thMain}>Change(24h)</th>
+                        <th className={styles.thMain}>Market Cap</th>
+                        <th className={styles.thMain}>Price</th>
+                        <th className={styles.thMain}></th>
                     </tr>
                 </thead>
                 <tbody>
                     {data.data.map(assets =>
-                        <tr
+                        <tr className={styles.trMain}
                             key={assets.id}
                             onClick={() => navigate(`/coin/${assets.id}`)}
                         >
-                            <td>{assets.rank}</td>
-                            <td>
+                            <td className={styles.tdMain}>{assets.rank}</td>
+                            <td className={styles.tdMain}>
                                 {assets.name}
-                                <td className={styles.symbol}>{assets.symbol}</td>
+                                <p className={styles.symbol}>{assets.symbol}</p>
                             </td>
-                            <td>${Number(assets.vwap24Hr).toFixed(2)}</td>
-                            <td
+                            <td className={styles.tdMain}>${Number(assets.vwap24Hr).toFixed(2)}</td>
+                            <td className={styles.tdMain}
                                 style={assets.changePercent24Hr < 0 ? {color: 'red'} : {color: 'green'}}
                             >
                                 {Number(assets.changePercent24Hr).toFixed(2)}%
                             </td>
-                            <td>${Number(assets.marketCapUsd).toLocaleString('en')}</td>
-                            <td>${Number(assets.priceUsd).toFixed(2)}</td>
-                            <td>
+                            <td className={styles.tdMain}>${Number(assets.marketCapUsd).toLocaleString('en')}</td>
+                            <td className={styles.tdMain}>${Number(assets.priceUsd).toFixed(2)}</td>
+                            <td  className={styles.tdMain} onClick={(e) => showModal(e, assets)}>
                                 <img
                                     src={plus}
                                     alt='plus'
@@ -72,5 +77,3 @@ const MainTable = ({limit, setLimit}) => {
 };
 
 export default MainTable;
-
-//Number(data.data[0].marketCapUsd).toFixed(0).length

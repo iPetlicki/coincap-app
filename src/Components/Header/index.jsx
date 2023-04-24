@@ -5,7 +5,12 @@ import portfolio from '../../Assets/Images/portfolio.svg'
 import MostPopularCoins from "../MostPopularCoins";
 
 
-const Header = () => {
+
+const Header = ({setPortfolioActive}) => {
+    const showPortfolio = (e) => {
+        e.stopPropagation()
+        setPortfolioActive(true)
+    }
     return (
         <div>
             <div className={styles.headerLogo}>
@@ -17,9 +22,9 @@ const Header = () => {
                 <div className={styles.headerPopularCoinsContainer}>
                     <MostPopularCoins />
                 </div>
-                <button className={styles.headerPortfolio}>
+                <button className={styles.headerPortfolio} onClick={(e) => showPortfolio(e)}>
                     <img src={portfolio} alt='portfolio' />
-                    <span className={styles.headerPortfolioValue}>16156.24 $</span>
+                    <span className={styles.headerPortfolioValue}>{localStorage.length}</span>
                 </button>
             </div>
         </div>
