@@ -15,9 +15,16 @@ export const coinsApi = createApi({
                 url: `assets/${id}`,
                 method: "GET",
             }),
+            transformResponse: (response, meta, arg) => response.data
+        }),
+        getHistory: build.query({
+            query: ({coinId, period}) => ({
+                url: `assets/${coinId}/history?interval=${period}`,
+                method: "GET",
+            }),
+            transformResponse: (response, meta, arg) => response.data
         })
     })
-
 })
 
-export const {useGetCoinsQuery, useGetCoinQuery} = coinsApi
+export const {useGetCoinsQuery, useGetCoinQuery, useGetHistoryQuery, } = coinsApi

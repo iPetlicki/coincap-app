@@ -84,7 +84,14 @@ td:nth-child(7) {
     font-weight: 700;
     font-size: 14px;
     position: relative;
-    left: 50%;
-    transform: translate(-50%, 0);
-    margin: 40px 0;
+    left: 44%;
+    margin: 40px auto;
+    transition: transform .2s
+
 }
+
+.viewMore:hover {
+    cursor: pointer;
+    transform: scale(1.1, 1.1);
+}
+

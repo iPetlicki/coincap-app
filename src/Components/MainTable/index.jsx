@@ -1,6 +1,8 @@
 import {useGetCoinsQuery} from "../../Redux/coinsApi";
 import styles from '../../Assets/Styles/mainTable.module.css'
 import {useNavigate} from "react-router-dom";
+import plus from '../../Assets/Images/plus.svg'
+
 
 const MainTable = ({limit, setLimit}) => {
 
@@ -46,7 +48,15 @@ const MainTable = ({limit, setLimit}) => {
                             </td>
                             <td>${Number(assets.marketCapUsd).toLocaleString('en')}</td>
                             <td>${Number(assets.priceUsd).toFixed(2)}</td>
-                            <td>+</td>
+                            <td>
+                                <img
+                                    src={plus}
+                                    alt='plus'
+                                    width='16px'
+                                    height='16px'
+                                    title='add to portfolio'
+                                />
+                            </td>
                         </tr>
                     )}
                 </tbody>

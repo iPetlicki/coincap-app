@@ -29,6 +29,11 @@
     display: flex;
     justify-content: space-around;
     padding-top: 10px;
+    transition: transform .2s
+}
+.headerPortfolio:hover {
+    cursor: pointer;
+    transform: scale(1.1, 1.1);
 }
 
 .headerPortfolioValue{
