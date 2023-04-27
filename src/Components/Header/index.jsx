@@ -6,10 +6,10 @@ import MostPopularCoins from "../MostPopularCoins";
 
 
 
-const Header = ({setPortfolioActive}) => {
-    const showPortfolio = (e) => {
+const Header = ({setWalletActive, total}) => {
+    const showWallet = (e) => {
         e.stopPropagation()
-        setPortfolioActive(true)
+        setWalletActive(true)
     }
     return (
         <div>
@@ -22,9 +22,9 @@ const Header = ({setPortfolioActive}) => {
                 <div className={styles.headerPopularCoinsContainer}>
                     <MostPopularCoins />
                 </div>
-                <button className={styles.headerPortfolio} onClick={(e) => showPortfolio(e)}>
+                <button className={styles.headerWallet} onClick={(e) => showWallet(e)}>
                     <img src={portfolio} alt='portfolio' />
-                    <span className={styles.headerPortfolioValue}>{localStorage.length}</span>
+                    <span className={styles.headerWalletValue}>{total} $</span>
                 </button>
             </div>
         </div>

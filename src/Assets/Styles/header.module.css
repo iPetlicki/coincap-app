@@ -18,7 +18,7 @@
     margin-left: 360px;
 }
 
-.headerPortfolio {
+.headerWallet {
     width: 184px;
     height: 42px;
     margin: 42px 10% 42px 0;
@@ -31,12 +31,12 @@
     padding-top: 10px;
     transition: transform .2s
 }
-.headerPortfolio:hover {
+.headerWallet:hover {
     cursor: pointer;
     transform: scale(1.1, 1.1);
 }
 
-.headerPortfolioValue{
+.headerWalletValue{
     font-family: 'Lato';
     font-style: normal;
     font-weight: 700;

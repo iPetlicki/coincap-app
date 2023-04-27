@@ -5,7 +5,6 @@ import LineChart from "../../Components/lineChart";
 import styles from '../../Assets/Styles/coinPage.module.css'
 
 
-
 const CoinPage = () => {
     const {coinId} = useParams()
     const period = 'd1'
@@ -37,10 +36,27 @@ const CoinPage = () => {
             <h1>Loading</h1>
             :
             <div>
-                <p>{coinData.name}</p>
-                <p>{coinData.symbol}</p>
-                <p>{coinData.rank}</p>
-                <p>{coinData.explorer}</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Name</th>
+                            <th>Link</th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{coinData.rank}</td>
+                            <td>
+                                {coinData.name}
+                                {coinData.symbol}
+                            </td>
+                            <td>{coinData.explorer}</td>
+                        </tr>
+
+                    </tbody>
+                </table>
                 <div className={styles.chartContainer} >
                     {historyIsLoading ? null : <LineChart chartData={waitResponse()} />}
                 </div>

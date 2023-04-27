@@ -11,7 +11,7 @@ const MainTable = ({limit, setLimit, setActive, getData}) => {
     const showModal = (e, assets) => {
         e.stopPropagation()
         setActive(true)
-        getData(assets.priceUsd, assets.name)
+        getData(assets.priceUsd, assets.name, assets.id)
     }
 
 //------------------------------стилизовать---------------------

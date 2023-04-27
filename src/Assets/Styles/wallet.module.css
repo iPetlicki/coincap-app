@@ -29,5 +29,18 @@
     background-color: white;
     border: 1px #7490FC solid;
     overflow: auto;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 26px;
+    height: 26px;
+}
+
+.close:hover {
+    cursor: pointer;
 }
 
