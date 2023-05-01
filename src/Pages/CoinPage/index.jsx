@@ -5,7 +5,7 @@ import LineChart from "../../Components/lineChart";
 import styles from '../../Assets/Styles/coinPage.module.css'
 
 
-const CoinPage = () => {
+const CoinPage = ({id}) => {
     const {coinId} = useParams()
     const period = 'd1'
     const {data: coinData, isLoading} = useGetCoinQuery(coinId)
@@ -15,7 +15,7 @@ const CoinPage = () => {
         return historyIsLoading ? null : {
             labels: historyData.map(data => data.date.slice(0, 7).split('-').join('.')),
             datasets: [{
-                fill: true,
+                // fill: true,
                 data: historyData.map(data => data.priceUsd),
                 label:'Price $',
                 pointStyle: false,

@@ -2,20 +2,19 @@ import React, {useEffect, useRef, useState} from 'react';
 import styles from '../../../Assets/Styles/addModalWindow.module.css'
 import close from '../../../Assets/Images/close.svg'
 
-const AddWindow = ({active, setActive, name, price, id}) => {
+const AddWindow = ({active, setActive, name, price, id, assetState, setAssetState}) => {
     const [quantity, setQuantity] = useState('')
     const addQuantity = (e) => {
         e.preventDefault()
-        const data = {id, quantity: Number(quantity), name, oldPrice: price }
-        const store = JSON.parse(localStorage.getItem('wallet'))
-        if (store.find(obj => obj.id === id)) {
-            const newStore = store.filter(obj => obj.id !== id)
-            const oldData = store.filter(obj => obj.id === id)[0]
-            newStore.push({...oldData, quantity: Number(oldData.quantity) + Number(quantity)})
-            localStorage.setItem('wallet', JSON.stringify(newStore))
+        if (assetState.find(obj => obj.id === id)) {
+            const newStorage = assetState.map((item, index) => item.id === id ? {...item, quantity: Number(assetState[index].quantity) + Number(quantity)} : item)
+            localStorage.setItem('wallet', JSON.stringify(newStorage))
+            setAssetState(JSON.parse(localStorage.getItem('wallet')))
         } else {
-            store.push(data)
-            localStorage.setItem('wallet', JSON.stringify(store))
+            const newStorage = [...assetState, {id, quantity: Number(quantity), name, oldPrice: price }]
+            console.log(id)
+            localStorage.setItem('wallet', JSON.stringify(newStorage))
+            setAssetState(JSON.parse(localStorage.getItem('wallet')))
         }
         setQuantity('')
         setActive(false)

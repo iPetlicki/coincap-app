@@ -1,11 +1,11 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styles from "../../../Assets/Styles/wallet.module.css";
 import close from '../../../Assets/Images/close.svg'
 
-const Wallet = ({walletActive, setWalletActive, getTotal}) => {
-    const storage = JSON.parse(localStorage.getItem('wallet'))
-    const total = (storage.reduce((total, current) => {return total + current.quantity * current.oldPrice}, 0)).toFixed(2)
-    getTotal(total)
+const Wallet = ({walletActive, setWalletActive, getTotal, assetState, removeAsset}) => {
+    const total = (assetState.reduce((total, current) => {return total + current.quantity * current.oldPrice}, 0)).toFixed(2)
+
+    useEffect(() => getTotal(total))
 
     return (
             <div className={walletActive ? `${styles.modal} ${styles.active}` : styles.modal} onClick={() => setWalletActive(false)}>
@@ -22,13 +22,13 @@ const Wallet = ({walletActive, setWalletActive, getTotal}) => {
                             </tr>
                         </thead>
                         <tbody>
-                            {storage.map((asset) =>
+                            {assetState.map((asset) =>
                                 <tr key={asset.id}>
                                     <td>{asset.name}</td>
                                     <td>{asset.quantity}</td>
                                     <td>{Number(asset.oldPrice).toFixed(2)}</td>
                                     <td>{Number(asset.quantity * asset.oldPrice).toFixed(2)}</td>
-                                    <td>X</td>
+                                    <td onClick={() => removeAsset(asset.id)} className={styles.delete}>X</td>
                                 </tr>
                             )}
                         </tbody>
@@ -37,7 +37,6 @@ const Wallet = ({walletActive, setWalletActive, getTotal}) => {
                     <img className={styles.close} src={close} alt='close' onClick={() => setWalletActive(false)}/>
                 </div>
             </div>
-
     );
 };
 

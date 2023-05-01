@@ -26,18 +26,26 @@ function App() {
     if (!localStorage.getItem('wallet')) {
         localStorage.setItem('wallet', JSON.stringify([]))
     }
+    const [assetState, setAssetState] = useState(JSON.parse(localStorage.getItem('wallet')))
+    const removeAsset = (id) => {
+        const filteredArr = assetState.filter(item => item.id !== id)
+        localStorage.setItem('wallet', JSON.stringify(filteredArr))
+        setAssetState(JSON.parse(localStorage.getItem('wallet')))
+    }
+
+
 
     return (
           <div className='App'>
               <Header setWalletActive={setWalletActive} total={total}/>
               <Routes>
                   <Route path='/' element={<MainTable limit={limit} setLimit={setLimit} setActive={setAddActive} getData={getData}/>}/>
-                    <Route path='coin' element={<CoinPage />}>
-                        <Route path=':coinId' element={<CoinPage />}/>
+                    <Route path='coin' element={<CoinPage id={id}/>}>
+                        <Route path=':coinId' element={<CoinPage id={id}/>}/>
                     </Route>
               </Routes>
-              <AddWindow active={addActive} setActive={setAddActive}  name={name} price={price} id={id}/>
-              <Wallet walletActive={walletActive} setWalletActive={setWalletActive} getTotal={getTotal}/>
+              <AddWindow active={addActive} setActive={setAddActive}  name={name} price={price} id={id} assetState={assetState} setAssetState={setAssetState}/>
+              <Wallet walletActive={walletActive} setWalletActive={setWalletActive} getTotal={getTotal} assetState={assetState} removeAsset={removeAsset}/>
           </div>
   )
 }
