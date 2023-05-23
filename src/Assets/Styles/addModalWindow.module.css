@@ -20,18 +20,72 @@
 }
 
 .modal_content {
-    width: 50%;
-    height: 50%;
+    width: 800px;
+    height: 352px;
     padding: 20px;
-    border-radius: 6px;
+    border-radius: 9px;
     background-color: white;
     border: 1px #7490FC solid;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .form {
-    display: flex;
-    flex-direction: column;
+    background-color: #E7E5FF;
+    width: 564px;
+    height: 90px;
+    border-radius: 9px;
+    position: relative;
+    filter: drop-shadow(0px 8px 15px rgba(185, 193, 202, 0.53));
+    margin: 50px 0;
+    text-align: center;
+}
+
+.input {
+    font-family: 'Lato';
+    font-weight: bold;
+    font-size: 22px;
+    outline-color: #7490FC;
+    padding: 0 14px;
+    width: 350px;
+    height: 42px;
+    border-width: 0;
+    border-radius: 9px;
+    position: absolute;
+    left: 22px;
+    top: calc(50% - 42px/2);
+}
+
+.input::placeholder {
+    font-weight: normal;
+    font-size: 16px;
+    padding: 0 12px;
+}
+
+.add_coin {
+    padding: 8px 21px 11px 21px;
+    width: 138px;
+    height: 36px;
+    position: absolute;
+    left: calc(50% - 138px/2 + 187px);
+    top: calc(50% - 36px/2);
+    background: linear-gradient(96.66deg, #7490FC -7.42%, #601D96 155.8%);
+    box-shadow: 0 2px 15px -3px rgba(0, 0, 0, 0.4);
+    border-width: 0;
+    border-radius: 100px;
+    color: #FFFFFF;
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    transition: transform .2s;
+}
+
+.add_coin:hover {
+    cursor: pointer;
+    transform: scale(1.1, 1.1);
 }
 
 .close {

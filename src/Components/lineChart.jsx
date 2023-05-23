@@ -33,10 +33,8 @@ const LineChart = ({chartData}) => {
         },
         scales: {
             x: {
-               display: true,
-                ticks: {
-                    maxTicksLimit: 12
-                }
+               display: false,
+
             },
             y: {
                 display: true

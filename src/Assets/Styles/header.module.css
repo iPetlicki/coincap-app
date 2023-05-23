@@ -2,6 +2,11 @@
     font-family: 'Krona One', sans-serif;
     font-size: 20px;
     margin: 40px auto 40px 400px;
+    width: 165px;
+}
+
+.headerLogo:hover {
+    cursor: pointer;
 }
 
 .headerBackground {

@@ -21,7 +21,7 @@
 
 .modal_content {
     min-width: 50%;
-    min-height: 50%;
+    min-height: 352px;
     max-width: 100%;
     max-height: 100%;
     padding: 20px;
@@ -30,6 +30,58 @@
     border: 1px #7490FC solid;
     overflow: auto;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.thMain {
+    background-color: #E7E6FF;
+    font-weight: normal;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.tr_wallet {
+    background: #FFFFFF;
+    height: 48px;
+    border: solid 1px #D9D9D9;
+}
+
+.tr_wallet th:nth-child(1) {
+    min-width: 90px;
+    text-align: left;
+    padding-left: 10px;
+}
+
+.tr_wallet td:nth-child(1) {
+    min-width: 90px;
+    text-align: left;
+    padding-left: 10px;
+}
+
+.tr_wallet td:nth-child(2), .tr_wallet td:nth-child(3), .tr_wallet td:nth-child(4) {
+    min-width: 170px;
+    text-align: center;
+}
+
+.tr_wallet td:nth-child(5) {
+    min-width: 50px;
+    text-align: right;
+    padding-right: 24px;
+}
+
+.wallet_table {
+    filter: drop-shadow(0px 8px 15px rgba(185, 193, 202, 0.53));
+    border-collapse: collapse;
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.total_container {
+    display: flex;
+    flex-direction: row;
 }
 
 .close {
@@ -46,5 +98,10 @@
 
 .delete {
     cursor: pointer;
+}
+
+.empty {
+    display: block;
+    margin: auto;
 }
 
