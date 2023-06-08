@@ -93,4 +93,45 @@
     cursor: pointer;
     transform: scale(1.1, 1.1);
 }
+/*---------------------------------------*/
+@media (max-width: 1150px) {
+    .mainTableContainer {
+        width: 100%;
+    }
 
+    .thMain:nth-child(2), .tdMain:nth-child(2) {
+        width: 200px;
+        text-align: left;
+    }
+}
+
+@media (max-width: 480px) {
+    .mainTableContainer {
+        margin-top: 20px;
+    }
+
+    .thMain:nth-child(1), .tdMain:nth-child(1) {
+        width: 50px;
+    }
+
+    .thMain:nth-child(2), .tdMain:nth-child(2) {
+        width: 180px;
+        text-align: left;
+    }
+
+    .thMain:nth-child(3), .tdMain:nth-child(3), .thMain:nth-child(5), .tdMain:nth-child(5) {
+        display: none;
+    }
+
+    .thMain:nth-child(4), .tdMain:nth-child(4), .thMain:nth-child(6), .tdMain:nth-child(6) {
+        width: 100px;
+    }
+
+    .tdMain:nth-child(7) {
+        width: 80px;
+    }
+
+    .viewMore {
+        left: 34%;
+    }
+}

@@ -6,6 +6,8 @@ import MainTable from "./Components/MainTable";
 import React, {useState} from "react";
 import AddWindow from "./Components/ModalWindows/AddWindow";
 import Wallet from "./Components/ModalWindows/Wallet";
+import NotFoundPge from "./Pages/NotFountPage";
+import {useGetCoinsQuery} from "./Redux/coinsApi";
 
 function App() {
     if (!localStorage.getItem('wallet')) {
@@ -18,6 +20,11 @@ function App() {
     const [name, setName] = useState('')
     const [id, setId] = useState('')
     const [assetState, setAssetState] = useState(JSON.parse(localStorage.getItem('wallet')))
+    const [totalCurrent, setTotalCurrent] = useState('')
+    if (limit > 2000) {
+        setLimit(2000)
+    }
+    const {data, isLoading, isError} = useGetCoinsQuery(limit)
     const checkIsNumber = (quantity) => {
         return !isNaN(quantity) && quantity > 0
     }
@@ -31,6 +38,9 @@ function App() {
         const filteredArr = assetState.filter(item => item.id !== id)
         localStorage.setItem('wallet', JSON.stringify(filteredArr))
         setAssetState(JSON.parse(localStorage.getItem('wallet')))
+    }
+    const getTotalCurrent = (value) => {
+        setTotalCurrent(value)
     }
 
     const transformValues = (string) => {
@@ -52,33 +62,60 @@ function App() {
     }
 
     return (
-          <div className='App'>
-              <Header setWalletActive={setWalletActive} totalOld={totalOld} transformValues={transformValues}/>
-              <Routes>
-                  <Route path='/' element={<MainTable limit={limit} setLimit={setLimit} setAddActive={setAddActive} getData={getData} transformValues={transformValues}/>}/>
-                    <Route path='coin' element={<CoinPage assetState={assetState} setAssetState={setAssetState} checkIsNumber={checkIsNumber} transformValues={transformValues}/>}>
-                        <Route path=':coinId' element={<CoinPage assetState={assetState} setAssetState={setAssetState} checkIsNumber={checkIsNumber} transformValues={transformValues}/>}/>
-                    </Route>
-              </Routes>
-              <AddWindow
-                  addActive={addActive}
-                  setAddActive={setAddActive}
-                  name={name}
-                  price={price}
-                  id={id}
-                  assetState={assetState}
-                  setAssetState={setAssetState}
-                  checkIsNumber={checkIsNumber}
-              />
-              <Wallet
-                  walletActive={walletActive}
-                  setWalletActive={setWalletActive}
-                  totalOld={totalOld}
-                  assetState={assetState}
-                  removeAsset={removeAsset}
-                  transformValues={transformValues}
-              />
-          </div>
+        <>
+            {isError
+                ?
+                <NotFoundPge />
+                :
+                <div className='App'>
+                    <Header
+                        setWalletActive={setWalletActive}
+                        totalCurrent={totalCurrent}
+                        transformValues={transformValues}
+                        data={data}
+                        isLoading={isLoading}
+                        isError={isError}
+                    />
+                    <Routes>
+                        <Route path='/'
+                               element={<MainTable
+                                   limit={limit}
+                                   setLimit={setLimit}
+                                   setAddActive={setAddActive}
+                                   getData={getData}
+                                   transformValues={transformValues}
+                                   data={data}
+                                   isLoading={isLoading}
+                                   isError={isError}
+                               />
+                               }/>
+                        <Route path='coin' element={<CoinPage assetState={assetState} setAssetState={setAssetState} checkIsNumber={checkIsNumber} transformValues={transformValues}/>}>
+                            <Route path=':coinId' element={<CoinPage assetState={assetState} setAssetState={setAssetState} checkIsNumber={checkIsNumber} transformValues={transformValues}/>}/>
+                        </Route>
+                        <Route path='*' element={<NotFoundPge />} />
+                    </Routes>
+                    <AddWindow
+                        addActive={addActive}
+                        setAddActive={setAddActive}
+                        name={name}
+                        price={price}
+                        id={id}
+                        assetState={assetState}
+                        setAssetState={setAssetState}
+                        checkIsNumber={checkIsNumber}
+                    />
+                    <Wallet
+                        walletActive={walletActive}
+                        setWalletActive={setWalletActive}
+                        totalOld={totalOld}
+                        assetState={assetState}
+                        removeAsset={removeAsset}
+                        transformValues={transformValues}
+                        getTotalCurrent={getTotalCurrent}
+                    />
+                </div>}
+        </>
+
   )
 }
 

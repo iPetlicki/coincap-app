@@ -11,6 +11,7 @@
     opacity: 0;
     pointer-events: none;
     transition: 0.5s;
+    z-index: 2;
 }
 
 .modal.active {
@@ -47,25 +48,19 @@
     border: solid 1px #D9D9D9;
 }
 
-.tr_wallet th:nth-child(1) {
-    min-width: 90px;
-    text-align: left;
-    padding-left: 10px;
-}
-
-.tr_wallet td:nth-child(1) {
-    min-width: 90px;
+.tr_wallet th:nth-child(1), .tr_wallet td:nth-child(1) {
+    width: 90px;
     text-align: left;
     padding-left: 10px;
 }
 
 .tr_wallet td:nth-child(2), .tr_wallet td:nth-child(3), .tr_wallet td:nth-child(4) {
-    min-width: 170px;
+    width: 170px;
     text-align: center;
 }
 
 .tr_wallet td:nth-child(5) {
-    min-width: 50px;
+    width: 50px;
     text-align: right;
     padding-right: 24px;
 }
@@ -105,3 +100,20 @@
     margin: auto;
 }
 
+@media (max-width: 480px) {
+    .modal_content {
+        padding: 10px;
+    }
+
+    .tr_wallet td:nth-child(2) {
+       width: 50px;
+    }
+
+    .tr_wallet td:nth-child(3), .tr_wallet td:nth-child(4) {
+        width: 90px;
+    }
+
+    .tr_wallet td:nth-child(5) {
+        padding-right: 4px;
+    }
+}

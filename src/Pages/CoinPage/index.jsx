@@ -5,13 +5,14 @@ import LineChart from "../../Components/lineChart";
 import styles from '../../Assets/Styles/coinPage.module.css'
 import back from '../../Assets/Images/back.svg'
 import LoadMain from "../../Components/loadMain";
+import NotFoundPge from "../NotFountPage";
 
 const CoinPage = ({assetState, setAssetState, checkIsNumber, transformValues}) => {
     const navigate = useNavigate()
     const {coinId} = useParams()
     const period = 'd1'
     const {data: coinData, isLoading} = useGetCoinQuery(coinId)
-    const {data: historyData, isLoading: historyIsLoading} = useGetHistoryQuery({coinId, period})
+    const {data: historyData, isLoading: historyIsLoading, isError} = useGetHistoryQuery({coinId, period})
     const [coinQuantity, setCoinQuantity] = useState('')
     const today = new Date();
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
@@ -50,32 +51,36 @@ const CoinPage = ({assetState, setAssetState, checkIsNumber, transformValues}) =
 
     return (
         <>
-        {
-            isLoading
-            ?
-            <LoadMain />
-            :
-                <>
-                    <div className={styles.page_head}>
-                        <div className={styles.coin_head_info}>
-                            <p className={styles.coin_name}>{coinData.name}</p>
-                            <p className={styles.coin_symbol}>{coinData.symbol}</p>
-                            <p className={styles.date}>{now}</p>
+            {isError
+                ?
+                <NotFoundPge />
+                :
+
+                    isLoading
+                    ?
+                    <LoadMain />
+                    :
+                    <>
+                        <div className={styles.page_head}>
+                            <div className={styles.coin_head_info}>
+                                <p className={styles.coin_name}>{coinData.name}</p>
+                                <p className={styles.coin_symbol}>{coinData.symbol}</p>
+                                <p className={styles.date}>{now}</p>
+                            </div>
+                            <form className={styles.form} onSubmit={e => addCoin(e)}>
+                                <input className={styles.input} value={coinQuantity} placeholder='Enter quantity' onChange={e => setCoinQuantity(e.target.value)}/>
+                                <button className={styles.add_coin} disabled={!checkIsNumber(coinQuantity)}>Add</button>
+                            </form>
                         </div>
-                        <form className={styles.form} onSubmit={e => addCoin(e)}>
-                            <input className={styles.input} value={coinQuantity} placeholder='Enter quantity' onChange={e => setCoinQuantity(e.target.value)}/>
-                            <button className={styles.add_coin} disabled={!checkIsNumber(coinQuantity)}>Add</button>
-                        </form>
-                    </div>
-                    <div className={styles.info_container}>
-                        <table className={styles.info_table}>
-                            <thead className={styles.table_head}>
-                            <tr>
-                                <th>Information</th>
-                                <th>Сurrency data</th>
-                            </tr>
-                            </thead>
-                            <tbody>
+                        <div className={styles.info_container}>
+                            <table className={styles.info_table}>
+                                <thead className={styles.table_head}>
+                                <tr>
+                                    <th>Information</th>
+                                    <th>Сurrency data</th>
+                                </tr>
+                                </thead>
+                                <tbody>
                                 <tr>
                                     <td>Price</td>
                                     <td style={{fontWeight:'bold'}}>{transformValues(coinData.priceUsd)} </td>
@@ -104,17 +109,18 @@ const CoinPage = ({assetState, setAssetState, checkIsNumber, transformValues}) =
                                     <td>Link</td>
                                     <td><a href={`${coinData.explorer}`}  rel="noreferrer" target={'_blank'}>Click</a></td>
                                 </tr>
-                            </tbody>
-                        </table>
-                        <div className={styles.chartContainer}>
-                            {historyIsLoading ? null : <LineChart chartData={waitResponse()} />}
+                                </tbody>
+                            </table>
+                            <div className={styles.chartContainer}>
+                                {historyIsLoading ? null : <LineChart chartData={waitResponse()} />}
+                            </div>
                         </div>
-                    </div>
-                    <button className={styles.back} onClick={() => navigate('/')}>
-                        <img src={back} alt='' className={styles.arrow}></img>
-                    </button>
-            </>
-        }
+                        <button className={styles.back} onClick={() => navigate('/')}>
+                            <img src={back} alt='' className={styles.arrow}></img>
+                            Back
+                        </button>
+                    </>
+            }
         </>
     )
 }

@@ -1,12 +1,12 @@
-import {useGetCoinsQuery} from "../../Redux/coinsApi";
 import styles from '../../Assets/Styles/mainTable.module.css'
 import {useNavigate} from "react-router-dom";
 import plus from '../../Assets/Images/plus.svg'
 import LoadMain from "../loadMain";
+import UpArrow from "../upArrow";
 
 
-const MainTable = ({limit, setLimit, getData, setAddActive, transformValues}) => {
-    const {data, isLoading} = useGetCoinsQuery(limit)
+const MainTable = ({limit, setLimit, getData, setAddActive, transformValues, data, isLoading}) => {
+
     const navigate = useNavigate()
     const showModal = (e, assets) => {
         e.stopPropagation()
@@ -22,6 +22,7 @@ const MainTable = ({limit, setLimit, getData, setAddActive, transformValues}) =>
                     <LoadMain />
                     :
                     <div className={styles.mainTableContainer}>
+                        <UpArrow />
                         <table className={styles.mainTable}>
                             <thead>
                             <tr className={styles.trMain}>

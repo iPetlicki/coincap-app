@@ -1,11 +1,11 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useGetCoinsQuery} from '../../../Redux/coinsApi';
 import styles from "../../../Assets/Styles/wallet.module.css";
 import close from '../../../Assets/Images/close.svg'
 import remove from '../../../Assets/Images/remove.svg'
 import empty from '../../../Assets/Images/empty.svg'
 
-const Wallet = ({walletActive, setWalletActive, totalOld, assetState, removeAsset, transformValues}) => {
+const Wallet = ({walletActive, setWalletActive, totalOld, assetState, removeAsset, transformValues, getTotalCurrent}) => {
     const {data, isLoading} = useGetCoinsQuery(2000)
     const getCurrentPrice = (asset) => {
         return data.data.find(obj => obj.id === asset.id ).priceUsd
@@ -24,6 +24,9 @@ const Wallet = ({walletActive, setWalletActive, totalOld, assetState, removeAsse
             return <p style={{color: 'red'}}>({`${differenceValues()}, ${Math.abs(differencePercents())}`}%)</p>
         }
     }
+    useEffect(() => {
+        getTotalCurrent(isLoading? null :totalCurrent())
+    })
 
     return (
         <>
