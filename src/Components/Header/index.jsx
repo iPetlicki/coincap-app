@@ -1,9 +1,10 @@
 import React from 'react';
+import {useNavigate} from "react-router-dom";
 import styles from '../../Assets/Styles/header.module.css'
 import logo from '../../Assets/Images/header-logo.svg'
 import portfolio from '../../Assets/Images/portfolio.svg'
 import MostPopularCoins from "../MostPopularCoins";
-import {useNavigate} from "react-router-dom";
+
 
 
 

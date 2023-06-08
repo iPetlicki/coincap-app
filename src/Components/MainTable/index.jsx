@@ -1,19 +1,16 @@
-import styles from '../../Assets/Styles/mainTable.module.css'
 import {useNavigate} from "react-router-dom";
+import styles from '../../Assets/Styles/mainTable.module.css'
 import plus from '../../Assets/Images/plus.svg'
 import LoadMain from "../loadMain";
 import UpArrow from "../upArrow";
 
-
 const MainTable = ({limit, setLimit, getData, setAddActive, transformValues, data, isLoading}) => {
-
     const navigate = useNavigate()
     const showModal = (e, assets) => {
         e.stopPropagation()
         setAddActive(true)
         getData(assets.priceUsd, assets.name, assets.id)
     }
-
     return (
         <>
             {
@@ -64,7 +61,6 @@ const MainTable = ({limit, setLimit, getData, setAddActive, transformValues, dat
                         <button className={styles.viewMore} onClick={() => setLimit(limit + 10)}>View More</button>
                     </div>
             }
-
         </>
     )
 }

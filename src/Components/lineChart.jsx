@@ -23,7 +23,6 @@ ChartJS.register(
     Filler
 )
 
-
 const LineChart = ({chartData}) => {
     const options = {
         plugins: {

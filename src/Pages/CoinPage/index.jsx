@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import {useGetCoinQuery, useGetHistoryQuery} from "../../Redux/coinsApi";
 import {useParams, useNavigate} from 'react-router-dom'
-import LineChart from "../../Components/lineChart";
 import styles from '../../Assets/Styles/coinPage.module.css'
 import back from '../../Assets/Images/back.svg'
+import LineChart from "../../Components/lineChart";
 import LoadMain from "../../Components/loadMain";
 import NotFoundPge from "../NotFountPage";
 
@@ -17,7 +17,6 @@ const CoinPage = ({assetState, setAssetState, checkIsNumber, transformValues}) =
     const today = new Date();
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     const now = today.toLocaleString('en-US', options);
-
     const addCoin = (e) => {
         e.preventDefault()
         if (assetState.find(obj => obj.id === coinData.id)) {
@@ -31,7 +30,6 @@ const CoinPage = ({assetState, setAssetState, checkIsNumber, transformValues}) =
         }
         setCoinQuantity('')
     }
-
     const waitResponse = () => {
         return historyIsLoading ? null : {
             labels: historyData.map(data => data.date.slice(0, 10).split('-').join('.')),
