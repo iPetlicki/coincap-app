@@ -33,51 +33,54 @@ const Wallet = ({walletActive, setWalletActive, totalOld, assetState, removeAsse
                 ?
                 null
                 :
-                <div className={walletActive ? `${styles.modal} ${styles.active}` : styles.modal} onClick={() => setWalletActive(false)}>
-                    <div className={styles.modal_content} onClick={e => e.stopPropagation()}>
-                        {assetState.length === 0
-                            ? <>
-                                <h1 className={styles.empty}>Your wallet is empty</h1>
-                                <img src={empty} width='200px' height='200px' alt=''/>
-                              </>
-                            :
-                            <>
-                                <h1>Wallet</h1>
-                                <table className={styles.wallet_table}>
-                                    <thead>
-                                    <tr className={styles.tr_wallet}>
-                                        <th className={styles.thMain}>Name</th>
-                                        <th className={styles.thMain}>Quantity</th>
-                                        <th className={styles.thMain}>Price</th>
-                                        <th className={styles.thMain}>Sum</th>
-                                        <th className={styles.thMain}> </th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    {assetState.map(asset =>
-                                        <tr className={styles.tr_wallet} key={asset.id}>
-                                            <td>{asset.name}</td>
-                                            <td>{asset.quantity}</td>
-                                            <td>{transformValues(getCurrentPrice(asset))}</td>
-                                            <td>{transformValues((asset.quantity * getCurrentPrice(asset)))}</td>
-                                            <td onClick={() => removeAsset(asset.id)} className={styles.delete}><img src={remove} alt=''/></td>
+                <>
+                    {walletActive &&
+                    <div className={walletActive ? `${styles.modal} ${styles.active}` : styles.modal} onClick={() => setWalletActive(false)}>
+                        <div className={styles.modal_content} onClick={e => e.stopPropagation()}>
+                            {assetState.length === 0
+                                ? <>
+                                    <h1 className={styles.empty}>Your wallet is empty</h1>
+                                    <img src={empty} width='200px' height='200px' alt=''/>
+                                </>
+                                :
+                                <>
+                                    <h1>Wallet</h1>
+                                    <table className={styles.wallet_table}>
+                                        <thead>
+                                        <tr className={styles.tr_wallet}>
+                                            <th className={styles.thMain}>Name</th>
+                                            <th className={styles.thMain}>Quantity</th>
+                                            <th className={styles.thMain}>Price</th>
+                                            <th className={styles.thMain}>Sum</th>
+                                            <th className={styles.thMain}> </th>
                                         </tr>
-                                    )}
-                                    </tbody>
-                                </table>
-                                <div className={styles.total_container}>
-                                    <p>Total: {transformValues(totalCurrent())}</p>
-                                    {totalCurrent() - totalOld !== 0
-                                        ? (<div style={{display:'flex'}}>
-                                            {displayDifference()}
-                                        </div>)
-                                        : null}
-                                </div>
-                            </>
-                        }
-                        <img className={styles.close} src={close} alt='close' onClick={() => setWalletActive(false)}/>
-                    </div>
-                </div>
+                                        </thead>
+                                        <tbody>
+                                        {assetState.map(asset =>
+                                            <tr className={styles.tr_wallet} key={asset.id}>
+                                                <td>{asset.name}</td>
+                                                <td>{asset.quantity}</td>
+                                                <td>{transformValues(getCurrentPrice(asset))}</td>
+                                                <td>{transformValues((asset.quantity * getCurrentPrice(asset)))}</td>
+                                                <td onClick={() => removeAsset(asset.id)} className={styles.delete}><img src={remove} alt=''/></td>
+                                            </tr>
+                                        )}
+                                        </tbody>
+                                    </table>
+                                    <div className={styles.total_container}>
+                                        <p>Total: {transformValues(totalCurrent())}</p>
+                                        {totalCurrent() - totalOld !== 0
+                                            ? (<div style={{display:'flex'}}>
+                                                {displayDifference()}
+                                            </div>)
+                                            : null}
+                                    </div>
+                                </>
+                            }
+                            <img className={styles.close} src={close} alt='close' onClick={() => setWalletActive(false)}/>
+                        </div>
+                    </div>}
+                </>
                 }
         </>
     )

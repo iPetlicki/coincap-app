@@ -42,7 +42,6 @@ function App() {
     const getTotalCurrent = (value) => {
         setTotalCurrent(value)
     }
-
     const transformValues = (string) => {
         if (Math.abs(string) >= 1e6 && Math.abs(string) < 1e9) {
             return '$' + (Number(string) / 1e6).toFixed(2) + 'm'
