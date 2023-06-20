@@ -10,11 +10,11 @@ const AddWindow = ({addActive, name, assetState, setAssetState, setAddActive, pr
         addCoin(e, assetState, price, quantity, setAssetState, id, name)
         setQuantity('')
         setAddActive(false)
+        textInput.current.blur()
     }
     useEffect(() => {
         textInput.current.focus()
     }, [addActive])
-    // скорее всего косяк в мобильной из за этого юзЭфекта
 
     return (
         <div
