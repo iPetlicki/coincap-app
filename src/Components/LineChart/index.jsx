@@ -23,7 +23,7 @@ ChartJS.register(
     Filler
 )
 
-const LineChart = ({chartData}) => {
+const Index = ({chartData}) => {
     const options = {
         plugins: {
             legend: {
@@ -46,4 +46,4 @@ const LineChart = ({chartData}) => {
     );
 };
 
-export default LineChart;
+export default Index;

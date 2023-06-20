@@ -9,6 +9,12 @@
     cursor: pointer;
 }
 
+.headerName {
+    position: relative;
+    margin-left: 6px;
+    top: -2px;
+}
+
 .headerBackground {
     background: linear-gradient(95.03deg, #7490FC 5.71%, #601D96 118.39%), #D9D9D9;
     width: 100%;

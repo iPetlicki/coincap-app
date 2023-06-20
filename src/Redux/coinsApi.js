@@ -18,8 +18,8 @@ export const coinsApi = createApi({
             transformResponse: (response, meta, arg) => response.data
         }),
         getHistory: build.query({
-            query: ({coinId, period}) => ({
-                url: `assets/${coinId}/history?interval=${period}`,
+            query: (coinId) => ({
+                url: `assets/${coinId}/history?interval=d1`,
                 method: "GET",
             }),
             transformResponse: (response, meta, arg) => response.data

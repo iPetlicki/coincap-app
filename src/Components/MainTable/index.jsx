@@ -1,8 +1,8 @@
 import {useNavigate} from "react-router-dom";
 import styles from '../../Assets/Styles/mainTable.module.css'
 import plus from '../../Assets/Images/plus.svg'
-import LoadMain from "../loadMain";
-import UpArrow from "../upArrow";
+import LoadMain from "../AuxiliaryComponents/loadMain";
+import UpArrow from "../AuxiliaryComponents/upArrow";
 
 const MainTable = ({limit, setLimit, getData, setAddActive, transformValues, data, isLoading}) => {
     const navigate = useNavigate()

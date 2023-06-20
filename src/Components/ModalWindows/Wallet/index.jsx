@@ -13,16 +13,15 @@ const Wallet = ({walletActive, setWalletActive, totalOld, assetState, removeAsse
     const totalCurrent = () => {
         return assetState.map(item => item.quantity * Number(getCurrentPrice(item))).reduce((total, current) =>  total + current, 0)
     }
-    const differenceValues = () => isLoading ? null : transformValues(totalCurrent() - totalOld)
-    const differencePercents = () => isLoading ? null : ((totalCurrent() - totalOld) / totalOld * 100).toFixed(3)
+    const differenceValues = isLoading ? null : transformValues(totalCurrent() - totalOld)
+    const differencePercents =  isLoading ? null : ((totalCurrent() - totalOld) / totalOld * 100).toFixed(3)
     const displayDifference = () => {
-        if (differencePercents() === 0) {
+        if (!differencePercents) {
             return null
-        } else if (differencePercents() > 0) {
-            return <p style={{color: 'green'}}>({`+${differenceValues()}, ${Math.abs(differencePercents())}`}%)</p>
-        } else if (differencePercents() < 0) {
-            return <p style={{color: 'red'}}>({`${differenceValues()}, ${Math.abs(differencePercents())}`}%)</p>
+        } else {
+            return <p className={differencePercents < 0 ? styles.negative : styles.positive}>({`${differenceValues}, ${Math.abs(differencePercents)}`}%)</p>
         }
+
     }
     useEffect(() => {
         getTotalCurrent(isLoading? null :totalCurrent())

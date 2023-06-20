@@ -100,6 +100,25 @@
     margin: auto;
 }
 
+.negative {
+    color: red;
+}
+
+.negative::before {
+    color: red;
+    content: '-';
+}
+
+.positive {
+    color: green;
+}
+
+.positive::before {
+    content: '+';
+    color: green;
+}
+
+
 @media (max-width: 480px) {
     .modal_content {
         padding: 10px;

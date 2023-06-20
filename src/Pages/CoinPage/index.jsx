@@ -3,31 +3,20 @@ import {useGetCoinQuery, useGetHistoryQuery} from "../../Redux/coinsApi";
 import {useParams, useNavigate} from 'react-router-dom'
 import styles from '../../Assets/Styles/coinPage.module.css'
 import back from '../../Assets/Images/back.svg'
-import LineChart from "../../Components/lineChart";
-import LoadMain from "../../Components/loadMain";
+import Index from "../../Components/LineChart";
+import LoadMain from "../../Components/AuxiliaryComponents/loadMain";
 import NotFoundPge from "../NotFountPage";
+import {today, options} from "../../Helpers/getDate";
+import addCoin from "../../Helpers/addCoins";
 
 const CoinPage = ({assetState, setAssetState, checkIsNumber, transformValues}) => {
     const navigate = useNavigate()
     const {coinId} = useParams()
-    const period = 'd1'
     const {data: coinData, isLoading} = useGetCoinQuery(coinId)
-    const {data: historyData, isLoading: historyIsLoading, isError} = useGetHistoryQuery({coinId, period})
+    const {data: historyData, isLoading: historyIsLoading, isError} = useGetHistoryQuery(coinId)
     const [coinQuantity, setCoinQuantity] = useState('')
-    const today = new Date();
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    const now = today.toLocaleString('en-US', options);
-    const addCoin = (e) => {
-        e.preventDefault()
-        if (assetState.find(obj => obj.id === coinData.id)) {
-            const newStorage = assetState.map((item, index) => item.id === coinData.id ? {...item, oldPrice: coinData.priceUsd, quantity: Number(assetState[index].quantity) + Number(coinQuantity)} : item)
-            localStorage.setItem('wallet', JSON.stringify(newStorage))
-            setAssetState(JSON.parse(localStorage.getItem('wallet')))
-        } else {
-            const newStorage = [...assetState, {id: coinData.id, quantity: Number(coinQuantity), name: coinData.name, oldPrice: coinData.priceUsd}]
-            localStorage.setItem('wallet', JSON.stringify(newStorage))
-            setAssetState(JSON.parse(localStorage.getItem('wallet')))
-        }
+    const handleClick = (e) => {
+        addCoin(e, assetState, coinData.priceUsd, coinQuantity, setAssetState, coinData.id, coinData.name)
         setCoinQuantity('')
     }
     const waitResponse = () => {
@@ -63,9 +52,9 @@ const CoinPage = ({assetState, setAssetState, checkIsNumber, transformValues}) =
                             <div className={styles.coin_head_info}>
                                 <p className={styles.coin_name}>{coinData.name}</p>
                                 <p className={styles.coin_symbol}>{coinData.symbol}</p>
-                                <p className={styles.date}>{now}</p>
+                                <p className={styles.date}>{today.toLocaleDateString('en-US', options)}</p>
                             </div>
-                            <form className={styles.form} onSubmit={e => addCoin(e)}>
+                            <form className={styles.form} onSubmit={e => handleClick(e)}>
                                 <input className={styles.input} value={coinQuantity} placeholder='Enter quantity' onChange={e => setCoinQuantity(e.target.value)}/>
                                 <button className={styles.add_coin} disabled={!checkIsNumber(coinQuantity)}>Add</button>
                             </form>
@@ -110,7 +99,7 @@ const CoinPage = ({assetState, setAssetState, checkIsNumber, transformValues}) =
                                 </tbody>
                             </table>
                             <div className={styles.chartContainer}>
-                                {historyIsLoading ? null : <LineChart chartData={waitResponse()} />}
+                                {historyIsLoading ? null : <Index chartData={waitResponse()} />}
                             </div>
                         </div>
                         <button className={styles.back} onClick={() => navigate('/')}>
